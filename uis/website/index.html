@@ -28,13 +28,14 @@
 </head>
 <body class="bg-slate-950 text-white antialiased">
 
-  <header class="border-b border-slate-800">
+  <header class="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/95 backdrop-blur-sm">
     <nav aria-label="Navegación principal"
          class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-5">
       <a href="./index.html" class="text-2xl font-bold text-blue-400">
         TrackFlow
       </a>
       <div class="flex flex-wrap gap-5 text-sm">
+        <a href="#inicio" class="hover:text-blue-400">Inicio</a>
         <a href="#servicios" class="hover:text-blue-400">Servicios</a>
         <a href="#nosotros" class="hover:text-blue-400">Nosotros</a>
         <a href="#contacto" class="hover:text-blue-400">Contacto</a>
@@ -46,7 +47,7 @@
     </nav>
   </header>
 
-  <main>
+  <main id="inicio" class="scroll-mt-40">
     <section class="mx-auto max-w-6xl px-5 py-20 sm:py-28">
       <p class="mb-4 font-semibold text-blue-400">
         Logística para comercio electrónico
@@ -65,7 +66,7 @@
       </a>
     </section>
 
-    <section id="servicios" class="bg-slate-900 px-5 py-16">
+    <section id="servicios" class="scroll-mt-40 sm:scroll-mt-28 bg-slate-900 px-5 py-16">
       <div class="mx-auto max-w-6xl">
         <h2 class="mb-8 text-3xl font-bold">Nuestros servicios</h2>
         <div class="grid gap-6 md:grid-cols-3">
@@ -91,7 +92,7 @@
       </div>
     </section>
 
-    <section id="nosotros" class="mx-auto max-w-6xl px-5 py-16">
+    <section id="nosotros" class="scroll-mt-40 sm:scroll-mt-28 mx-auto max-w-6xl px-5 py-16">
       <h2 class="text-3xl font-bold">Experiencia internacional</h2>
       <p class="mt-4 max-w-2xl text-slate-300">
         Desde 2009, TrackFlow desarrolla operaciones logísticas
@@ -146,7 +147,7 @@
       </div>
     </section>
 
-    <section id="contacto" class="bg-slate-900 px-5 py-16">
+    <section id="contacto" class="scroll-mt-40 sm:scroll-mt-28 bg-slate-900 px-5 py-16">
       <div class="mx-auto max-w-6xl">
         <h2 class="text-3xl font-bold">Hablemos de tu operación</h2>
         <p class="mt-4 text-slate-300">
