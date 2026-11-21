@@ -31,11 +31,17 @@ if (form && feedback) {
         if (value.length < 2 || value.length > 100) {
           return "El nombre de la empresa debe tener entre 2 y 100 caracteres.";
         }
+        if (!/[\p{L}]/u.test(value)) {
+          return "Introduce un nombre de empresa, no solo números o un RUT.";
+        }
         break;
 
       case "contact_name":
         if (value.length < 2 || value.length > 100) {
           return "El nombre del contacto debe tener entre 2 y 100 caracteres.";
+        }
+        if (!/^[\p{L}\p{M}][\p{L}\p{M} .'’-]*$/u.test(value)) {
+          return "El nombre debe contener letras, sin números ni símbolos especiales.";
         }
         break;
 
@@ -105,11 +111,11 @@ if (form && feedback) {
     if (message) {
       field.setAttribute("aria-invalid", "true");
       field.classList.add("border-rose-400");
-      field.classList.remove("border-slate-600");
+      field.classList.remove("border-slate-700");
     } else {
       field.removeAttribute("aria-invalid");
       field.classList.remove("border-rose-400");
-      field.classList.add("border-slate-600");
+      field.classList.add("border-slate-700");
     }
   }
 
