@@ -1,0 +1,23 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test tests/validation.test.cjs",
+    "build": "tailwindcss -i ./input.css -o ./output.css --minify",
+    "start": "http-server . -p 3000 -a 0.0.0.0 -c-1",
+    "check:js": "node --check validation.js",
+    "quality": "npm run check:js && npm run check:html && npm test && npm run build",
+    "check:html": "html-validate index.html application.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.5",
+    "html-validate": "^11.21.1",
+    "http-server": "^14.1.1",
+    "tailwindcss": "^4.3.5"
+  }
+}

@@ -1,0 +1,68 @@
+name: TrackFlow - Publish GitHub Pages
+
+on:
+  push:
+    branches:
+      - feature/trackflow-public-website
+    paths:
+      - 'uis/website/**'
+      - '.github/workflows/trackflow-pages.yml'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: trackflow-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Obtener codigo
+        uses: actions/checkout@v6
+
+      - name: Preparar Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+
+      - name: Instalar dependencias
+        working-directory: uis/website
+        run: npm ci
+
+      - name: Verificar calidad y compilar
+        working-directory: uis/website
+        run: npm run quality
+
+      - name: Verificar CSS generado
+        run: git diff --exit-code -- uis/website/output.css
+
+      - name: Preparar archivos publicos
+        run: |
+          mkdir -p "$RUNNER_TEMP/trackflow-pages"
+          cp uis/website/index.html \
+             uis/website/application.html \
+             uis/website/output.css \
+             uis/website/validation.js \
+             uis/website/favicon.svg \
+             "$RUNNER_TEMP/trackflow-pages/"
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Subir archivos publicos
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ${{ runner.temp }}/trackflow-pages
+
+      - name: Publicar sitio
+        id: deployment
+        uses: actions/deploy-pages@v4

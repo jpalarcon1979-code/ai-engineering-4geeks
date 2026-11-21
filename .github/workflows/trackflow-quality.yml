@@ -1,0 +1,42 @@
+name: TrackFlow Quality Gate
+
+on:
+  push:
+    paths:
+      - 'uis/website/**'
+      - '.github/workflows/trackflow-quality.yml'
+  pull_request:
+    paths:
+      - 'uis/website/**'
+      - '.github/workflows/trackflow-quality.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: uis/website
+
+    steps:
+      - name: Obtener el código
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Preparar Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Ejecutar Quality Gate
+        run: npm run quality
+
+      - name: Comprobar CSS compilado
+        run: git diff --exit-code -- output.css
